@@ -7,6 +7,8 @@ import methodOverride from "method-override"
 import morgan from "morgan"
 import Fruit from "./models/fruit.js"
 
+import {fruitsCtrl} from ".controllers/fruits.js"
+
 dotenv.config(); // Loads the environment variables from .env file
 const app = express();
 
@@ -29,10 +31,8 @@ app.get("/fruits/new", async (req, res) => {
 
 
 // GET /fruits
-app.get("/fruits", async (req, res) => {
-    const allFruits = await Fruit.find();
-    res.render("fruits/index.ejs", { fruits: allFruits});
-  });
+app.get("/fruits", fruitsCtrl.index);
+    
   
 // POST /fruits
 app.post("/fruits", async (req, res) => {
